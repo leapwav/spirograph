@@ -1,24 +1,65 @@
 import tkinter as tk
 from tkinter.simpledialog import askstring
 import turtle
+from tkinter import *
+
+def initialise():
+    global master, largeCogValue, smallCogValue, dValue
+
+    master = Tk()
+    master.minsize(1100,600)
+    master.wm_title('Spyrograph')
+
+    color_list = [
+        "RED",
+        "ORANGE",
+        "YELLOW",
+        "GREEN",
+        "BLUE",
+        "INDIGO",
+        "VIOLET"]
+
+    clicked = StringVar()
+    clicked.set( "RED" )
+
+    colorDropDown = OptionMenu(master, clicked, *color_list)
+    colorDropDown.place(x=935,y=315)
+
+    Label(master,text="Outer Cog:").place(x=955,y=370)
+    largeCogValue = Scale(master,from_=5,to=100,orient=HORIZONTAL,command=cogSizeCheck)
+    largeCogValue.place(x=935,y=395)
+
+    Label(master,text="Inner Cog:").place(x=955,y=290)
+    smallCogValue = Scale(master,from_=5,to=100,orient=HORIZONTAL,command=cogSizeCheck)
+    smallCogValue.place(x=935,y=315)
+    
+    Label(master,text="D Value:").place(x=955,y=450)
+    dValue = Scale(master, from_=2, to_=99, orient=HORIZONTAL,command=cogSizeCheck)
+    dValue.place (x=935, y=475)
+
+    confirmButton = Button(master,text="CONFIRM")
+    confirmButton.place(x=950,y=525,w=75,h=40)
+
+    canvas = tk.Canvas(master, background= "white", width=500, height= 500)
+
+    canvas.place(x=270,y=50)
+
+def cogSizeCheck(n):
+    global largeCogValue, smallCogValue
+    if largeCogValue.get() <= smallCogValue.get():
+        print('large is smaller than small')
+        print(largeCogValue.get())
+        print(smallCogValue.get())
+        largeCogValue.set(smallCogValue.get()+1)
+        
+    if dValue.get() == smallCogValue.get() + 10:
+        dValue.set(smallCogValue.get() + 10)
+        print("1")
+        
+    if dValue.get() < smallCogValue.get() - 10:
+        dValue.set(smallCogValue.get() - 10)
+        print("2")
 
 
-tina = turtle.Turtle()
-tina.shape("turtle")
-
-screen = turtle.Screen()
-root = screen._root
-
-controls = tk.Frame(root)
-tk.Label(controls, text="Move forward:").pack(side=tk.LEFT)
-fwd_entry = tk.Entry(controls)
-fwd_entry.pack(side=tk.LEFT)
-tk.Button(controls, text="Go!", command=lambda: tina.forward(int(fwd_entry.get()))).pack(side=tk.LEFT)
-controls.pack()
-
-tina_color = askstring("Tina's color", "What color should Tina the turtle be?")
-bg_color = askstring("The background color", "What color should the background be?")
-tina.color(tina_color)
-screen.bgcolor(bg_color)
-
-root.mainloop()
+initialise()
+master.mainloop()

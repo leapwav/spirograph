@@ -57,10 +57,9 @@ def initialise():
     boredButton = Button(master,text="bored",command=winston)
     boredButton.place(x=950,y=10,w=75,h=40)
 
-    clearButton = Button(master, text="CLEAR", command=clear)
+    clearButton = Button(master, text="CLEAR", command=lambda:clear_function())
     clearButton.place(x=135, y=475,w=75,h=40)
     
-    clear = False
     
 def cogSizeCheck(n):
     global largeCogValue, smallCogValue
@@ -92,7 +91,8 @@ def confirm():
         radt = t*0.017
         if t != 0 and clear == False:
             myturtle.down()
-        
+        elif clear == True:
+            break
         myturtle.setposition(int(constant*((largeCogValue-smallCogValue)*math.cos(radt))-constant*dValue*math.cos(largeCogValue/smallCogValue*radt-radt)), int(constant*((largeCogValue-smallCogValue)*math.sin(radt))-constant*dValue*math.sin(largeCogValue/smallCogValue*radt-radt)))
         myturtle.up()
             
@@ -104,11 +104,13 @@ def colorSys(self):
     global colorDropDown,clicked,myturtle
     myturtle.color(clicked.get().lower())
     
-def clear():
+def clear_function():
     global canvas, clear
     myturtle.up()
     canvas.delete("all")
+    master.destroy()
     clear = True
+    initialise()
         
 initialise()
 master.mainloop()

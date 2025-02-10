@@ -4,11 +4,8 @@ import turtle
 from tkinter import *
 import math
 
-
-
-
 def initialise():
-    global master, largeCogValue, smallCogValue, dValue, myturtle, canvas, clear
+    global master, largeCogValue, smallCogValue, dValue, myturtle, colorDropDown, clicked, canvas, clear
 
     master = Tk()
     master.minsize(1100,600)
@@ -26,20 +23,20 @@ def initialise():
     myturtle.up()
 
     color_list = [
+        "BLACK",
         "RED",
         "ORANGE",
         "YELLOW",
         "GREEN",
         "BLUE",
-        "INDIGO",
-        "VIOLET"]
+        "MAGENTA"]
 
     clicked = StringVar()
-    clicked.set( "RED" )
+    clicked.set( "BLACK" )
 
     Label(master,text="Colour:").place(x=955,y=225)
 
-    colorDropDown = OptionMenu(master, clicked, *color_list)
+    colorDropDown = OptionMenu(master, clicked, *color_list,command=colorSys)
     colorDropDown.place(x=940,y=250)
 
     Label(master,text="Outer Cog:").place(x=955,y=370)
@@ -64,7 +61,7 @@ def initialise():
     clearButton.place(x=135, y=475,w=75,h=40)
     
     clear = False
-
+    
 def cogSizeCheck(n):
     global largeCogValue, smallCogValue
     if largeCogValue.get() <= smallCogValue.get():
@@ -98,17 +95,20 @@ def confirm():
         
         myturtle.setposition(int(constant*((largeCogValue-smallCogValue)*math.cos(radt))-constant*dValue*math.cos(largeCogValue/smallCogValue*radt-radt)), int(constant*((largeCogValue-smallCogValue)*math.sin(radt))-constant*dValue*math.sin(largeCogValue/smallCogValue*radt-radt)))
         myturtle.up()
-
-
+            
+    
 def winston():
     print('winston')
 
-
+def colorSys(self):
+    global colorDropDown,clicked,myturtle
+    myturtle.color(clicked.get().lower())
+    
 def clear():
     global canvas, clear
     myturtle.up()
     canvas.delete("all")
     clear = True
-
+        
 initialise()
 master.mainloop()

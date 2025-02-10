@@ -8,7 +8,7 @@ import math
 
 
 def initialise():
-    global master, largeCogValue, smallCogValue, dValue, myturtle
+    global master, largeCogValue, smallCogValue, dValue, myturtle, canvas, clear
 
     master = Tk()
     master.minsize(1100,600)
@@ -57,9 +57,13 @@ def initialise():
     confirmButton = Button(master,text="CONFIRM",command=confirm)
     confirmButton.place(x=950,y=525,w=75,h=40)
     
-    confirmButton = Button(master,text="bored",command=winston)
-    confirmButton.place(x=950,y=10,w=75,h=40)
+    boredButton = Button(master,text="bored",command=winston)
+    boredButton.place(x=950,y=10,w=75,h=40)
 
+    clearButton = Button(master, text="CLEAR", command=clear)
+    clearButton.place(x=135, y=475,w=75,h=40)
+    
+    clear = False
 
 def cogSizeCheck(n):
     global largeCogValue, smallCogValue
@@ -77,8 +81,9 @@ def cogSizeCheck(n):
         print("2")
 
 def confirm():
-    global largeCogValue, smallCogValue, dValue, myturtle
+    global largeCogValue, smallCogValue, dValue, myturtle, clear
     
+    clear = False
     largeCogValue=largeCogValue.get()
     smallCogValue=smallCogValue.get()
     dValue=dValue.get()
@@ -88,14 +93,22 @@ def confirm():
     
     for t in range(0,3600000000000000,10):
         radt = t*0.017
-        if t != 0:
+        if t != 0 and clear == False:
             myturtle.down()
         
         myturtle.setposition(int(constant*((largeCogValue-smallCogValue)*math.cos(radt))-constant*dValue*math.cos(largeCogValue/smallCogValue*radt-radt)), int(constant*((largeCogValue-smallCogValue)*math.sin(radt))-constant*dValue*math.sin(largeCogValue/smallCogValue*radt-radt)))
         myturtle.up()
 
+
 def winston():
     print('winston')
+
+
+def clear():
+    global canvas, clear
+    myturtle.up()
+    canvas.delete("all")
+    clear = True
 
 initialise()
 master.mainloop()

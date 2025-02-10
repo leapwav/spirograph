@@ -83,7 +83,7 @@ def confirm():
     smallCogValue=smallCogValue.get()
     dValue=dValue.get()
     
-    
+    constant = 240/(largeCogValue-smallCogValue+dValue)
     print(largeCogValue,smallCogValue,dValue)
     
     for t in range(0,3600000000000000,10):
@@ -91,7 +91,7 @@ def confirm():
         if t != 0:
             myturtle.down()
         
-        myturtle.setposition(int(((largeCogValue-smallCogValue)*math.cos(radt))-dValue*math.cos(largeCogValue/smallCogValue*radt-radt)), int(((largeCogValue-smallCogValue)*math.sin(radt))-dValue*math.sin(largeCogValue/smallCogValue*radt-radt)))
+        myturtle.setposition(int(constant*((largeCogValue-smallCogValue)*math.cos(radt))-constant*dValue*math.cos(largeCogValue/smallCogValue*radt-radt)), int(constant*((largeCogValue-smallCogValue)*math.sin(radt))-constant*dValue*math.sin(largeCogValue/smallCogValue*radt-radt)))
         myturtle.up()
 
 def winston():

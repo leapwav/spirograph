@@ -44,7 +44,7 @@ def initialise():
     largeCogValue.place(x=935,y=395)
 
     Label(master,text="Inner Cog:").place(x=955,y=290)
-    smallCogValue = Scale(master,from_=5,to=100,orient=HORIZONTAL,command=cogSizeCheck)
+    smallCogValue = Scale(master,from_=5,to=99,orient=HORIZONTAL,command=cogSizeCheck)
     smallCogValue.place(x=935,y=315)
     
     Label(master,text="D Value:").place(x=955,y=450)

@@ -87,14 +87,36 @@ def confirm():
     constant = 240/(largeCogValue-smallCogValue+dValue)
     print(largeCogValue,smallCogValue,dValue)
     
-    for t in range(0,3600000000000000,10):
-        radt = t*0.017
-        if t != 0 and clear == False:
-            myturtle.down()
-        elif clear == True:
-            break
-        myturtle.setposition(int(constant*((largeCogValue-smallCogValue)*math.cos(radt))-constant*dValue*math.cos(largeCogValue/smallCogValue*radt-radt)), int(constant*((largeCogValue-smallCogValue)*math.sin(radt))-constant*dValue*math.sin(largeCogValue/smallCogValue*radt-radt)))
-        myturtle.up()
+    if largeCogValue-smallCogValue <= 5:
+
+        for t in range(0,3600000000000000,50):
+            radt = t*0.017
+            if t != 0 and clear == False:
+                myturtle.down()
+            elif clear == True:
+                break
+            myturtle.setposition(int(constant*((largeCogValue-smallCogValue)*math.cos(radt))-constant*dValue*math.cos(largeCogValue/smallCogValue*radt-radt)), int(constant*((largeCogValue-smallCogValue)*math.sin(radt))-constant*dValue*math.sin(largeCogValue/smallCogValue*radt-radt)))
+            myturtle.up()
+                
+    elif largeCogValue-smallCogValue >= 50:
+        for t in range(0,3600000000000000,2):
+            radt = t*0.017
+            if t != 0 and clear == False:
+                myturtle.down()
+            elif clear == True:
+                break
+            myturtle.setposition(int(constant*((largeCogValue-smallCogValue)*math.cos(radt))-constant*dValue*math.cos(largeCogValue/smallCogValue*radt-radt)), int(constant*((largeCogValue-smallCogValue)*math.sin(radt))-constant*dValue*math.sin(largeCogValue/smallCogValue*radt-radt)))
+            myturtle.up()
+    else:
+        for t in range(0,3600000000000000,10):
+            radt = t*0.017
+            if t != 0 and clear == False:
+                myturtle.down()
+            elif clear == True:
+                break
+            myturtle.setposition(int(constant*((largeCogValue-smallCogValue)*math.cos(radt))-constant*dValue*math.cos(largeCogValue/smallCogValue*radt-radt)), int(constant*((largeCogValue-smallCogValue)*math.sin(radt))-constant*dValue*math.sin(largeCogValue/smallCogValue*radt-radt)))
+            myturtle.up()
+
             
     
 def winston():

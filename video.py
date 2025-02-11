@@ -3,6 +3,7 @@ import tkinter as tk
 import imageio
 from PIL import Image, ImageTk
 
+print("ran")
 global pause_video
 
 
@@ -50,24 +51,24 @@ def _start():
     pause_video = False
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    root = tk.Tk()
-    root.title('Video in tkinter')
+root = tk.Toplevel()
+root.title('Video in tkinter')
 
-    my_label = tk.Label(root)
-    my_label.pack()
-    tk.Button(root, text='start', command=_start).pack(side=tk.LEFT)
-    tk.Button(root, text='stop', command=_stop).pack(side=tk.LEFT)
+my_label = tk.Label(root)
+my_label.pack()
+tk.Button(root, text='start', command=_start).pack(side=tk.LEFT)
+tk.Button(root, text='stop', command=_stop).pack(side=tk.LEFT)
 
-    pause_video = False
-    movie_frame = video_frame_generator()
+pause_video = False
+movie_frame = video_frame_generator()
 
-    while True:
-        if not pause_video:
-            frame_number, frame = next(movie_frame)
-            my_label.config(image=frame)
+while True:
+    if not pause_video:
+        frame_number, frame = next(movie_frame)
+        my_label.config(image=frame)
 
-        root.update()
+    root.update()
 
-    root.mainloop()
+root.mainloop()

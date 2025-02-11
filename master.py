@@ -99,7 +99,8 @@ def confirm():
     
 def winston():
     print('winston')
-
+    import video
+    
 def colorSys(self):
     global colorDropDown,clicked,myturtle
     myturtle.color(clicked.get().lower())
